@@ -1,0 +1,18 @@
+# Site settings
+title: Abhinav Kulkarni blog
+email: 
+description: "Fun stuff!"
+baseurl: ""
+url: "https://abhinavkulkarni.github.io/"
+twitter_username: kulkarniabhinav
+github_username:  abhinavkulkarni
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
