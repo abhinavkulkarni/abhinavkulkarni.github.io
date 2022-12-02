@@ -17,28 +17,31 @@ Let us consider sequence tagging problems such as POS or NER tagging. We are giv
 Let us look at a POS tagged example:
 
 
-{% highlight python %}
+```python
 import nltk
 
 tagged_sentences = nltk.corpus.treebank.tagged_sents()
 print(tagged_sentences[0])
+print()
 print('Number of tagged sentences: %d' % len(tagged_sentences))
 print('Number of tagged tokens: %d' % sum([len(tagged_sentence) for tagged_sentence in tagged_sentences]))
-
+print()
 unique_tags = set([
     tag 
     for tagged_sentence in tagged_sentences
     for _,tag in tagged_sentence])
 print('Set of unique tags: %s' % str(unique_tags))
-{% endhighlight %}
+```
 
 Output:
-{% highlight python %}
+```python
 [('Pierre', 'NNP'), ('Vinken', 'NNP'), (',', ','), ('61', 'CD'), ('years', 'NNS'), ('old', 'JJ'), (',', ','), ('will', 'MD'), ('join', 'VB'), ('the', 'DT'), ('board', 'NN'), ('as', 'IN'), ('a', 'DT'), ('nonexecutive', 'JJ'), ('director', 'NN'), ('Nov.', 'NNP'), ('29', 'CD'), ('.', '.')]
+
 Number of tagged sentences: 3914
 Number of tagged tokens: 100676
+
 Set of unique tags: {'.', 'POS', 'NNS', "''", 'JJR', 'LS', 'IN', 'JJ', 'NNP', '``', 'FW', '#', '$', 'WDT', 'WP$', 'PRP', 'VBZ', ',', 'TO', 'VBD', 'SYM', 'JJS', 'VBG', 'RBR', 'PRP$', 'CD', 'MD', '-NONE-', '-LRB-', '-RRB-', 'CC', 'DT', 'NNPS', 'VBN', 'UH', 'RB', 'NN', 'VBP', 'WRB', 'RBS', 'PDT', 'RP', 'WP', ':', 'EX', 'VB'}
-{% endhighlight %}
+```
 
 
 During test time, we may be given a token sequence such as `['The', 'cool', 'cat', '.']` and we may be required to predict the most likely tag sequence `['DT', 'JJ', 'NN', '.']`.
