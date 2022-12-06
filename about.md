@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-See my [website](https://abhinavkulkarni.github.io/).
+My [resume](/assets/Resume.pdf).
