@@ -43,8 +43,7 @@ Set of unique tags: {'.', 'POS', 'NNS', "''", 'JJR', 'LS', 'IN', 'JJ', 'NNP', '`
 
 During test time, we may be given a token sequence such as `['The', 'cool', 'cat', '.']` and we may be required to predict the most likely tag sequence `['DT', 'JJ', 'NN', '.']`.
 
-Hidden Markov Models (HMM)
------
+### Hidden Markov Models (HMM)
 
 A generative **_bigram_** HMM model factors the probability distribution for a given observed token sequence $\underline{x_{1:T}}$ and (hidden, non-observable) tag sequence $\underline{y_{1:T}}$ as follows: 
 
@@ -209,8 +208,7 @@ Please note:
 2. Details of Dynamic Programming based decoding (Viterbi) algorithm can be found online. 
 3. I'll also leave out a few important practical details (such as feature sparsity, efficient implementation, etc.) out of this blog post. They are mentioned in Prof. Collin's [write-ups][write-ups].
 
-Maximum Entropy Markov Models (MEMM)
------
+### Maximum Entropy Markov Models (MEMM)
 
 While HMMs are cool, they model the joint distribution, which is of little use as token sequence is given at inference anyway. Therefore, we should rather be modelling $p(\underline{y_{1:T}}\|\underline{x_{1:T}})$. MEMMs and CRFs precisely do that.
 
@@ -258,15 +256,13 @@ You may have noticed, we are incorporating richer context in the scoring functio
 
 The parameter learning and optimization procedure for MEMMs looks very similar to that for HMMs. Same goes with decoding, which has a nice recursive structure, thus allowing us to use Dynamic Programming.
 
-Label Bias Problem in MEMMs
------
+### Label Bias Problem in MEMMs
 
 I possibly cannot do any better job of explaining the label bias problem in MEMMs than has been done by Awni Hannun in this excellent [write-up][label-bias]. Essentially, the crux of the problem with MEMMs is that: 
 1. There is no way to recover from past mistakes as the decoding process moves ahead in the time dimension. Which state is transitioned to every time step is decided "locally".
 2. Often times, observations may have little effect in which states are transitioned to as states with fewer out-degrees are preferred as they don't reduce the overall probability too much.
 
-Conditional Random Fields (CRF)
------
+### Conditional Random Fields (CRF)
 
 We will talk about linear chain CRFs in this section. The equations for CRFs look like the following:
 

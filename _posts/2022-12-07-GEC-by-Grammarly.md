@@ -9,8 +9,8 @@ categories: jekyll update
 
 In this paper, I try to summarize the main ideas behind the two excellent papers published by Grammarly's research team for the tasks of [GEC][GEC paper] (Grammatical Error Correction) and [Text Simplification][Text simplification paper] tasks. Both papers are very well written and easy to understand.
 
-GEC Task
------
+### GEC Task
+
 [CoNLL-2014][CoNLL-2014 task] introduced the GEC task which aims to evaluate systems for automatically detecting and correcting grammatical errors present in English essays written by second language learners of English.
 
 1. To illustrate, consider the following sentence:
@@ -21,8 +21,6 @@ GEC Task
 
     The noun number error _networks_ needs to be corrected (network → networks). This necessitates the correction of a subject-verb agreement error (plays → play).
 
-<br>
-
 2. As an another example, consider the following sentence:
 
     ```
@@ -32,8 +30,8 @@ GEC Task
     There is a word form error (absolute → absolutely)
     in this sentence.
 
-GEC Performance Evaluation
------
+### GEC Performance Evaluation
+
 The performance is measured by how well the two sets **g** and **e** match, in the form of recall **R**, precision **P**, and **F0.5** measure, where **g** is the set of gold-standard edits and **e** is the set of system edits.
 
 For example, consider the following sentence:
@@ -59,8 +57,8 @@ R = \frac{1}{3}, P = \frac{1}{1}
 , F0.5 = \frac{1 + 0.5^2}{\frac{1}{P} + \frac{0.5^2}{R}} = \frac{5}{7}
 $$
 
-GECToR Model by Grammarly
------
+### GECToR Model by Grammarly
+
 Neural Machine Translation (NMT)-based approaches have become
 the preferred method for GEC. NMT proposes to solve GEC task by learning the maping between _source sentence_ → _target sentence_ where the target sentence is the one with the errors corrected. However, they suffer from 
 1. the lack of training data as NMT encoder-decoder models have higher representation capacity than encoder-only models, and 
