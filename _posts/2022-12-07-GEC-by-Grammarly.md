@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "Grammatical Error Correction & Text Simplification by Grammarly"
-date:   2020-01-14 19:21:13 -0800
+date:   2022-12-07 19:21:13 -0800
 comments: true
 categories: jekyll update
 ---
 
-Introduction
+A short explaination of the Grammatical Error Correction (GEC) and Text Simplification (TS) tasks and the GECToR model by Grammarly.
 -----
 
 In this paper, I try to summarize the main ideas behind the two excellent papers published by Grammarly's research team for the tasks of [GEC][GEC paper] (Grammatical Error Correction) and [Text Simplification][Text simplification paper] tasks. Both papers are very well written and easy to understand.

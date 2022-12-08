@@ -6,7 +6,7 @@ comments: true
 categories: jekyll update
 ---
 
-Introduction
+A short tutorial on sequence tagging with HMMs, MEMMs and CRFs
 -----
 
 
