@@ -21,6 +21,8 @@ GEC Task
 
     The noun number error _networks_ needs to be corrected (network → networks). This necessitates the correction of a subject-verb agreement error (plays → play).
 
+<br>
+
 2. As an another example, consider the following sentence:
 
     ```
@@ -32,7 +34,7 @@ GEC Task
 
 GEC Performance Evaluation
 -----
-The performance is measured by how well the two sets **g** and **e** match, in the form of recall **R**, precision **P**, and **F0.5** measure, where **g** set of gold-standard edits and **e** is the set of system edits.
+The performance is measured by how well the two sets **g** and **e** match, in the form of recall **R**, precision **P**, and **F0.5** measure, where **g** is the set of gold-standard edits and **e** is the set of system edits.
 
 For example, consider the following sentence:
 
@@ -64,9 +66,11 @@ the preferred method for GEC. NMT proposes to solve GEC task by learning the map
 1. the lack of training data as NMT encoder-decoder models have higher representation capacity than encoder-only models, and 
 2. slow inference speeds.
 
-GECToR is an encoder-only architecture. It uses a carefully crafted set of 5000 token-level edits.
+In contrast, GECToR is an encoder-only architecture. It uses a carefully crafted set of 5000 token-level edits.
 
-The edit tags can be token-independent such as
+The edit tags are classified as basic or transformational.
+
+The basic tags can be token-independent such as
 
 ```
 KEEP (no edit), 
@@ -80,9 +84,19 @@ or token-dependent such as
 REPLACE(t) (replace the current token with a with token t),
 
 APPEND(t) (append the current token with token t), 
+```
 
+The transformational edit tags transform the current token into a modified token. For example, 
+
+```
 VERB FORM (VB → VBD) (change the verb form from VB to VBD)
 for e.g. play → played
+
+CASE (CAPITAL) (capitalize the current token)
+for e.g. internet → Internet
+
+NOUN NUMBER (SINGULAR) (change the noun number from singular to plural)
+for e.g. citizen → citizens
 ```
 
 Following figure from the appendix section of the paper shows the edit tags:
@@ -101,15 +115,17 @@ $$
 
 where,
 
- $\mathbf{X}$ are the input token embeddings, 
+ $\mathbf{X}$ is the matrix of input token embeddings, 
 
-$\mathbf{\tilde{X}}$ are the output contextual token embeddings from a BERT-like transformer encoder, 
+$\mathbf{\tilde{X}}$ is the matrix of output contextual token embeddings from a BERT-like transformer encoder, 
 
 $\mathbf{p_{e,i}}$ is the binary probability of token $i$ needing to be corrected, and 
 
 $\mathbf{p_{t,i}}$ are the probabilities over 5000 possible edits for token $i$
 
-The error probabilities $\mathbf{p_e}$ act as a gate for the edit probabilities $\mathbf{p_t}$, that is, if $\mathbf{p_{e,i}}$ is lower than a threshold, then the edit probabilities $\mathbf{p_{t,i}}$ are not used and the token is kept as is. Moreover, among edit tag probabilities, probability of the tag KEEP is set to a fixed threshold value - both of these mechanisms force the model to make more accurate predictions. Other than this, the model also calculates overall sentence error probability - if it is above a certain threshold, only then further token-wise edits are made. 
+The error probabilities $\mathbf{p_e}$ act as binary gates for the edit probabilities $\mathbf{p_t}$, that is, if $\mathbf{p_{e,i}}$ is lower than a threshold, then the edit probabilities $\mathbf{p_{t,i}}$ are not used and the token is kept as is. 
+
+Moreover, among edit tag probabilities, probability of the tag KEEP is set to a fixed threshold value - both of these mechanisms force the model to make more accurate predictions. Other than this, the model also calculates overall sentence error probability - if it is above a certain threshold, only then further token-wise edits are made. 
 
 `sentence_error_probability`, `min_edit_probability` and `keep_probability` are the hyperparameters in the model.
 
