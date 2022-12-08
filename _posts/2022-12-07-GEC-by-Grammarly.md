@@ -60,7 +60,7 @@ $$
 ### GECToR Model by Grammarly
 
 Neural Machine Translation (NMT)-based approaches have become
-the preferred method for GEC. NMT proposes to solve GEC task by learning the maping between _source sentence_ → _target sentence_ where the target sentence is the one with the errors corrected. However, they suffer from 
+the preferred method for GEC. NMT proposes to solve GEC task by learning the maping between _source sentence_ → ^target sentence_ where the target sentence is the one with the errors corrected. However, they suffer from 
 1. the lack of training data as NMT encoder-decoder models have higher representation capacity than encoder-only models, and 
 2. slow inference speeds.
 
@@ -106,8 +106,8 @@ GECToR proposes an encoder-only model. For every token in the model, it predicts
 $$
 \begin{aligned}
 \mathbf{\tilde{X}} &= \text{ENCODER}(\mathbf{X}) \\
-\mathbf{p_{e,i}} &= \text{softmax}(\mathbf{W_e} \mathbf{\tilde{X_i}} + \mathbf{b_e}) \\
-\mathbf{p_{t,i}} &= \text{softmax}(\mathbf{W_t} \mathbf{\tilde{X_i}} + \mathbf{b_t}) \\
+\mathbf{p^e_i} &= \text{softmax}(\mathbf{W^e} \mathbf{\tilde{X_i}} + \mathbf{b^e}) \\
+\mathbf{p^t_i} &= \text{softmax}(\mathbf{W^t} \mathbf{\tilde{X_i}} + \mathbf{b^t}) \\
 \end{aligned}
 $$
 
@@ -117,23 +117,27 @@ where,
 
 $\mathbf{\tilde{X}}$ is the matrix of output contextual token embeddings from a BERT-like transformer encoder, 
 
-$\mathbf{p_{e,i}}$ is the binary probability of token $i$ needing to be corrected, and 
+$\mathbf{p^e_i}$ is the binary probability of token $i$ needing to be corrected, and 
 
-$\mathbf{p_{t,i}}$ are the probabilities over 5000 possible edits for token $i$
+$\mathbf{p^t_i}$ are the probabilities over 5000 possible edits for token $i$
 
-The error probabilities $\mathbf{p_e}$ act as binary gates for the edit probabilities $\mathbf{p_t}$, that is, if $\mathbf{p_{e,i}}$ is lower than a threshold, then the edit probabilities $\mathbf{p_{t,i}}$ are not used and the token is kept as is. 
+The error probabilities $\mathbf{p^e}$ act as binary gates for the edit probabilities $\mathbf{p^t}$, that is, if $\mathbf{p^e_i}$ is lower than a threshold, then the edit probabilities $\mathbf{p^t_i}$ are not used and the token is kept as is. 
 
-Moreover, among edit tag probabilities, probability of the tag KEEP is set to a fixed threshold value - both of these mechanisms force the model to make more accurate predictions. Other than this, the model also calculates overall sentence error probability - if it is above a certain threshold, only then further token-wise edits are made. 
+Moreover, among edit tag probabilities, probability of the tag KEEP is set to a fixed threshold value - both of these mechanisms force the model to make more accurate predictions. Other than this, the model also calculates overall sentence error probability (probably from the embeddings of `CLS` token) - if it is above a certain threshold, only then further token-wise edits are made. 
 
 `sentence_error_probability`, `min_edit_probability` and `keep_probability` are the hyperparameters in the model.
 
-Since each word in the source sentence may be split into multiple sub-word units based on the tokenizer used (byte-pair, word-piece or sentence-piece), we pass the first sub-word unit of each word into linear-softmax layers to obtain $\mathbf{p_{e,i}}$ and $\mathbf{p_{t,i}}$ probabilities.
+Since each word in the source sentence may be split into multiple sub-word units based on the tokenizer used (byte-pair, word-piece or sentence-piece), we pass the first sub-word unit of each word into linear-softmax layers to obtain $\mathbf{p^e_i}$ and $\mathbf{p^t_i}$ probabilities.
+
+### Model Inference
 
 The model performs iterative inference on a given source sentence until it arrives at an error-free sentence. The maximum number of such iterations is a hyperparameter that trades precision for latency.
 
 ![gector-inference]
 
-The paper has more details about various BERT-like encoder architectures that were tried and respective results.
+### Results
+
+The paper has more details about various BERT-like encoder architectures (BERT, XLNet, RoBERTa, etc.) that were tried and their respective results.
 
 [GEC paper]: https://arxiv.org/abs/2005.12592
 [Text simplification paper]: https://arxiv.org/abs/2103.05070
