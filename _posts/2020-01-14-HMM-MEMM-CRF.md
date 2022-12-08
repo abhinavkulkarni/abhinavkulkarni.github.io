@@ -1,14 +1,11 @@
 ---
 layout: post
 title:  "Sequence tagging with HMMs, MEMMs and CRFs"
+excerpt: "A short tutorial on sequence tagging with HMMs, MEMMs and CRFs"
 date:   2020-01-14 19:21:13 -0800
 comments: true
 categories: jekyll update
 ---
-
-A short tutorial on sequence tagging with HMMs, MEMMs and CRFs
------
-
 
 The inspiration for this blog has been drawn from Prof. Collin's excellent [write-ups][write-ups].
 
