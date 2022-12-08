@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Sequence tagging with HMMs, MEMMs and CRFs!"
+title:  "Sequence tagging with HMMs, MEMMs and CRFs"
 date:   2020-01-14 19:21:13 -0800
 comments: true
 categories: jekyll update
@@ -55,7 +55,9 @@ $$ p(\underline{x_{1:T}} , \underline{y_{1:T}}) = \prod_{t=1}^{T+1}p(y_t|y_{t-1}
 
 Here is how its graphical model looks like:
 
-![hmm-bigram]
+| ![hmm-bigram] |
+|:--:| 
+| *Space* |
 
 A generative **_trigram_** HMM model factors the probability distribution for a given observed token sequence $\underline{x_{1:T}}$ and (hidden, non-observable) tag sequence $\underline{y_{1:T}}$ as follows: 
 
