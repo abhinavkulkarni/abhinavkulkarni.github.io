@@ -2,7 +2,7 @@
 layout: post
 title:  "Entity Linking on Wikidata - BLINK by Facebook AI Research"
 excerpt: "BLINK is an entity linking framework from Facebook AI Research which implements a classic neural network based retriever-reader architecture for entity linking."
-date:   2022-12-09 19:21:13 -0800
+date:   2022-12-09   19:21:13 -0800
 comments: true
 categories: jekyll update
 ---
