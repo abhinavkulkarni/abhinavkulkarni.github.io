@@ -98,7 +98,7 @@ BLINK only uses 32 tokens for the context (including mention tokens). This was f
 To obtain Elon Musk's entity encoding from his [Wikipedia entry](https://en.wikipedia.org/wiki/Elon_Musk), we use the following input to the entity encoder:
 
 ```python
-max_cand_len = 256 - 2    # 2 for [CLS] and [SEP]
+max_cand_len = 128 - 2    # 2 for [CLS] and [SEP]
 
 title = "Elon Musk"
 description = "Elon Reeve Musk FRS is a business magnate, industrial designer, engineer, and philanthropist. He is the founder, CEO, CTO and chief designer of SpaceX; early investor, CEO and product architect of Tesla, Inc.; founder of The Boring Company; co-founder of Neuralink; and co-founder and initial co-chairman of OpenAI. A centibillionaire, Musk is one of the richest people in the world."
@@ -118,7 +118,7 @@ description_tokens[:n_desc] + \
 # Pass this through the entity encoder to obtain entity embeddings y_e
 ```
 
-For encoding candidates (entities from Wikipedia with their titles and abstract), BLINK uses maximum of 256 tokens. This was found to be sufficient for most entities.
+For encoding candidates (entities from Wikipedia with their titles and abstract), BLINK uses maximum of 128 tokens. This was found to be sufficient for most entities.
 
 ### Cross-encoder
 
@@ -133,7 +133,7 @@ $$
 \end{align*}
 $$
 
-where, $\mathbf{y_{m,e}}$ is the embedding of $\text{[CLS]}$ token of the cross-encoder and $\mathbf{W}$ is a linear layer applied to it in order to obtain a single score.
+where, $\mathbf{y_{m,e}}$ is the embedding of $\text{[CLS]}$ token of the cross-encoder and $\mathbf{W}$ is a linear layer applied to it in order to obtain a single score. For cross-encoder, BLINK uses maximum of 256 tokens. This was found to be sufficient for most mention-entity pairs.
 
 ### Training
 
