@@ -1,17 +1,17 @@
 ---
 layout: post
 title:  "Grammatical Error Correction & Text Simplification by Grammarly"
-excerpt: "A short explaination of the Grammatical Error Correction (GEC) and Text Simplification (TS) tasks and the GECToR model by Grammarly."
+excerpt: "A short explanation of the Grammatical Error Correction (GEC) and Text Simplification (TS) tasks and the GECToR model by Grammarly."
 date:   2022-12-07 19:21:13 -0800
 comments: true
 categories: jekyll update
 ---
 
-In this paper, I try to summarize the main ideas behind the two excellent papers published by Grammarly's research team for the tasks of [GEC][GEC paper] (Grammatical Error Correction) and [Text Simplification][Text simplification paper] tasks. Both papers are very well written and easy to understand.
+In this paper, I try to summarize the main ideas behind the two excellent papers published by Grammarly's research team for the tasks of [GEC][GEC paper] (Grammatical Error Correction) and [Text Simplification][Text simplification paper] tasks. Both papers are very well-written and easy to understand.
 
 ### GEC Task
 
-[CoNLL-2014][CoNLL-2014 task] introduced the GEC task which aims to evaluate systems for automatically detecting and correcting grammatical errors present in English essays written by second language learners of English.
+[CoNLL-2014][CoNLL-2014 task] introduced the GEC task, which aims to evaluate systems for automatically detecting and correcting grammatical errors present in English essays written by second language learners of English.
 
 1. To illustrate, consider the following sentence:
 
@@ -20,8 +20,7 @@ In this paper, I try to summarize the main ideas behind the two excellent papers
     ```
 
     The noun number error _networks_ needs to be corrected (network → networks). This necessitates the correction of a subject-verb agreement error (plays → play).
-
-2. As an another example, consider the following sentence:
+As another example, consider the following sentence:
 
     ```
     Nothing is absolute right or wrong.

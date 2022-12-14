@@ -1,39 +1,38 @@
 ---
 layout: post
-title:  "Entity Linking on Wikidata - BLINK by Facebook AI Research"
+title:  "Entity Linking on Wikidata - BLINK from Facebook AI Research"
 excerpt: "BLINK is an entity linking framework from Facebook AI Research which implements a classic neural network based retriever-reader architecture for entity linking."
 date:   2022-12-09 19:21:13 -0800
 comments: true
 categories: jekyll update
 ---
 
-In this blog post, I will try to summarize an Entity Linking method for Wikidata from Facebook AI Research- [BLINK](blink-link). It is open source and has Python libraries available.
+In this blog post, I will try to summarize an Entity Linking method for Wikidata from Facebook AI Research- [BLINK][blink-link]. It is open source and has Python libraries available.
 
 ### Entity Linking
 
-Entity Linking (EL) is the task of identifying mentions of entities in text and linking them to the corresponding entities in a knowledge base. The knowledge base can be a Wikipedia or Wikidata. The task is also known as Entity Disambiguation (ED).
+Entity Linking (EL) is identifying mentions of entities in text and linking them to the corresponding entities in a knowledge base. The knowledge base can be Wikipedia or Wikidata. The task is also known as Entity Disambiguation (ED).
 
-![en-image]
+![el-image]
 
 *In entity linking, each named entity is linked to a unique identifier. Often, this identifier corresponds to a Wikipedia page.* ([source](https://en.wikipedia.org/wiki/File:Entity_Linking_-_Short_Example.png))
-<br>
 
-Most state of the art EL systems are two staged - candidate selection followed by candidate ranking / rescoring. 
+Most state-of-the-art EL systems are two staged - candidate selection followed by candidate ranking / rescoring. 
 
-The candidate selection stage is used to generate a set of candidate entities for each mention. For e.g., for mention "Paris", the candidate selection stage may generate the following set of candidate entities:
+The candidate selection stage generates a set of candidate entities for each mention. E.g., for mention "Paris", the candidate selection stage may generate the following collection of candidate entities:
 
 - Paris (capital of France)
 - Paris Hilton (American businesswoman, socialite, model, actress, singer, DJ, and author)
 - Paris Saint-Germain F.C. (French professional football club)
 - Paris Agreement (international agreement within the United Nations Framework Convention on Climate Change), etc.
 
-The candidate ranking stage is used to rank the candidate entities in the order of their likelihood of being the correct entity for the mention. For e.g., for the mention "Paris", we hope that the candidate ranking stage will rank the entity "Paris (capital of France)" as the most likely entity.
+The candidate ranking stage ranks the candidate entities in the order of their likelihood of being the correct entity for the mention. E.g., for the mention "Paris", we hope that the candidate ranking stage will rank the entity "Paris (capital of France)" as the most likely entity.
 
-### BLINK by Facebook AI Research
+### BLINK EL Framework
 
-BLINK is an EL method that uses a neural network in a classic retriever-reader fashion. The biencoder-based retriever stage uses two separate BERT-like transformer encoders to generate top-k candidates. The mention-encoder produces fixed-length vector embeddings for the mention and surrounding context whereas entity-encoder produces similar embeddings from the entity title and description. Top-k candidate entities are retreived based on similarity (dot-product based).
+BLINK is an EL method that uses a neural network in a classic retriever-reader fashion. The biencoder-based retriever stage uses two BERT-like transformer encoders to generate top-k candidates. The mention-encoder produces fixed-length vector embeddings for the mention and surrounding context whereas entity-encoder produces similar embeddings from the entity title and description. Top-k candidate entities are retrieved based on similarity (dot-product based).
 
-These candidates and the mention are then jointly scored by a cross-encoder which is also a BERT-like transformer encoder.
+These candidates and the mention are then jointly scored by a cross-encoder, a BERT-like transformer encoder.
 
 ### Biencoder
 
@@ -139,12 +138,11 @@ where, $\mathbf{y_{m,e}}$ is the embedding of $\text{[CLS]}$ token of the cross-
 
 Biencoders are trained to maximize the similarity between mention and entity pairs that are linked in the training data and minimize the similarity between (randomly sampled) mention-entity pairs that are not linked. This is done by using a contrastive loss function.
 
-Crossencoder is trained to maximize the similarity between mention-entity pairs that are linked in the training data and minimize the similarity between other entities (among `top-k`) that were retrieved for the same mention by biencoder. This is done by using a contrastive loss function.
+Crossencoder is trained to maximize the similarity between mention-entity pairs linked in the training data and minimize the similarity between other entities (among `top-k`) that were retrieved for the same mention by biencoder. This is done by using a contrastive loss function.
 
 ### Nearest Neighbor Index
 
 Candidate enocdings can be pre-computed and stored in a nearest neighbor index such as [FAISS](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/). Unlike, many other entity linking frameworks, BLINK can update candidate encodings periodically and re-index them. This does not require re-training the biencoder and cross-encoder.
 
-[rel-link]: https://github.com/informagi/REL
 [blink-link]: https://github.com/facebookresearch/BLINK
-[en-image]: /assets/entity-linking/640px-Entity_Linking_-_Short_Example.png
+[el-image]: /assets/entity-linking/640px-Entity_Linking_-_Short_Example.png
