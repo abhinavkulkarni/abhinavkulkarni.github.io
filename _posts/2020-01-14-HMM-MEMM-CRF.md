@@ -7,11 +7,11 @@ comments: true
 categories: jekyll update
 ---
 
-The inspiration for this blog has been drawn from Prof. Collin's excellent [write-ups][write-ups].
+I drew inspiration for this blog from Prof. Collin's excellent [write-ups][write-ups].
 
-Let us consider sequence tagging problems such as POS or NER tagging. We are given a sequence of tokens and we would like to predict most-likely (non-observable, hidden) tags that correspond to these tokens. 
+Let us consider sequence tagging problems such as POS or NER tagging. Given a sequence of tokens, we would like to predict the most likely (non-observable, hidden) tags that correspond to these tokens. 
 
-Let us look at a POS tagged example:
+Let us look at a POS-tagged example:
 
 
 ```python
@@ -150,7 +150,7 @@ $$
 
 $$
 
-This captures the tag sequence for a sentence begining with a noun.
+This captures the tag sequence for a sentence beginning with a noun.
 
 $$
 
@@ -164,7 +164,7 @@ $$
 
 $$
 
-This captures tag trigram occurence (`Idea (NN) is (VGZ) working (VBG)`).
+This captures tag trigram occurrence (`Idea` (NN) is (VGZ) working (VBG)`).
 
 
 Similarly, consider:

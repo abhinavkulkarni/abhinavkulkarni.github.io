@@ -128,7 +128,7 @@ $$
 & \text{Input: } \\
 & \mathbf{x} = \text{[CLS] ctx$_l$ [M$_s$] mention [M$_e$] ctx$_r$ [SEP] title [ENT] description [SEP]} \\
 & \mathbf{y_{m,e}} = \text{BERT}_{cross}(\mathbf{x}) \\
-& s_{cross}(m, e) = \mathbf{y_{m,e} \cdot W}
+& s_{cross}(m, e) = \mathbf{y_{m,e}^T \cdot W}
 \end{align*}
 $$
 
@@ -141,8 +141,7 @@ Biencoders are trained to maximize the similarity between mention and entity pai
 Crossencoder is trained to maximize the similarity between mention-entity pairs linked in the training data and minimize the similarity between other entities (among `top-k`) that were retrieved for the same mention by biencoder. This is done by using a contrastive loss function.
 
 ### Nearest Neighbor Index
-
-Candidate enocdings can be pre-computed and stored in a nearest neighbor index such as [FAISS](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/). Unlike, many other entity linking frameworks, BLINK can update candidate encodings periodically and re-index them. This does not require re-training the biencoder and cross-encoder.
+Candidate encodings can be pre-computed and stored in a nearest neighbor index such as [FAISS](https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/). Unlike, many other entity linking frameworks, BLINK can update candidate encodings periodically and re-index them. This does not require re-training the biencoder and cross-encoder.
 
 [blink-link]: https://github.com/facebookresearch/BLINK
 [el-image]: /assets/entity-linking/640px-Entity_Linking_-_Short_Example.png
