@@ -1,7 +1,7 @@
 # Site settings
 title: Abhinav Kulkarni blog
 email: 
-description: "Fun stuff!"
+# description: "Fun stuff!"
 baseurl: ""
 url: "https://abhinavkulkarni.github.io/"
 twitter_username: kulkarniabhinav
