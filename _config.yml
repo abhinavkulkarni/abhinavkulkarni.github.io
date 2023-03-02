@@ -1,11 +1,16 @@
 # Site settings
-title: Abhinav Kulkarni blog
+title: Abhinav Kulkarni's blog
 email: 
-# description: "Fun stuff!"
+description: "Abhinav Kulkarni's blog"
 baseurl: ""
 url: "https://abhinavkulkarni.github.io/"
+
+# Social links
 twitter_username: kulkarniabhinav
 github_username:  abhinavkulkarni
+
+# Google Analytics
+google_analytics: G-HL4W1BH9W2
 
 # Build settings
 markdown: kramdown
