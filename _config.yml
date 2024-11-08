@@ -9,9 +9,6 @@ url: "https://abhinavkulkarni.github.io/"
 twitter_username: kulkarniabhinav
 github_username:  abhinavkulkarni
 
-# Google Analytics
-google_analytics: G-HL4W1BH9W2
-
 # Build settings
 markdown: kramdown
 permalink: pretty
